@@ -2,26 +2,44 @@ import { useContext } from "react";
 import StaysContext from "../context/StaysContext";
 import LocationSelectedContext from "../context/LocationSelectedContext";
 
-export default function Cards() {
+export default function Cards({ setLocationSelected }) {
   const stays = useContext(StaysContext);
+
   const locationSelected = useContext(LocationSelectedContext);
+
+  const filteredStays = stays.filter(
+    (stay) =>
+      locationSelected === "Add location" || stay.city === locationSelected
+  );
 
   return (
     <>
+      <section className="flex justify-end px-6 gap-2">
+        <button className="flex items-center justify-center">
+          <p
+            onClick={() => setLocationSelected("Add location")}
+            id="mostrarTodo"
+            className="cursor-pointer text-[12px] text-red-400 font-medium active:underline active:font-semibold"
+          >
+            SHOW ALL
+          </p>
+        </button>
+        <p
+          id="cantidadCards"
+          className="flex items-center justify-center text-[12px] text-gray-700"
+        >
+          {filteredStays.length} stays
+        </p>
+      </section>
       <section
         id="catalogoConten"
         className="grid grid-cols-1 sm:grid-cols-2 place-items-center px-4 gap-1 sm:gap-4 lg:grid-cols-3"
       >
-        {console.log(locationSelected)}
-        {stays.map((stay, i) => (
+        {filteredStays.map((stay, i) => (
           <div
             key={i}
-            className={`catalogoTodos group cursor-pointer hover:scale-102 duration-300 w-full flex-col items-center justify-center gap-1 py-2 active:scale-98 lg:active:scale-100
-              ${
-                [stay.city, "Add location"].includes(locationSelected)
-                  ? "flex"
-                  : "hidden"
-              }`}
+            className={`catalogoTodos group cursor-pointer hover:scale-102 duration-300 w-full flex flex-col items-center justify-center gap-1 py-2 active:scale-98 lg:active:scale-100
+              `}
           >
             <div className="absolute object-cover h-55 sm:h-60 lg:h-65 text-[9px] flex items-start justify-center self-end">
               <p className="w-18 p-0.5 bg-white rounded-bl-lg rounded-tl-sm flex items-center justify-center">

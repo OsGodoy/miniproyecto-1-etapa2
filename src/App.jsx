@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Search from "./components/Search";
-import Catalog from "./components/Catalog";
 import Cards from "./components/Cards";
 import ModalSearch from "./components/ModalSearch";
 import StaysContext from "./context/StaysContext";
@@ -46,8 +45,7 @@ export default function App() {
                   Stays in Finland
                 </h2>
               </section>
-              <Catalog />
-              <Cards />
+              <Cards setLocationSelected={setLocationSelected} />
             </main>
             <footer className="text-xs text-gray-500 h-10 w-full flex items-center justify-center">
               <p>© 2025 - Os Godoy</p>
