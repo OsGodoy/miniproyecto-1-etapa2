@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import SearchEdit from "./SearchEdit";
 import { useContext } from "react";
 import StaysContext from "../context/StaysContext";
+import LocationSelectedContext from "../context/LocationSelectedContext";
 
 export default function ModalSearch({ toggleSearch, setToggleSearch }) {
   const [toggleLocation, setToggleLocation] = useState(false);
   const [toggleGuests, setToggleGuests] = useState(false);
   const stays = useContext(StaysContext);
+
+  const [locationSelected, setLocationSelected] = useState("Add location");
 
   return (
     <>
@@ -70,10 +73,14 @@ export default function ModalSearch({ toggleSearch, setToggleSearch }) {
                 <p className="text-[8px] font-semibold">LOCATION</p>
                 <p
                   id="locacionSelecMobile"
-                  className="text-gray-300 text-[14px] font-medium"
+                  className={`text-[14px] font-medium ${
+                    locationSelected !== "Add location"
+                      ? "text-red-400"
+                      : "text-gray-300"
+                  }`}
                   style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
                 >
-                  Add location
+                  {locationSelected}
                 </p>
               </div>
 
@@ -104,6 +111,8 @@ export default function ModalSearch({ toggleSearch, setToggleSearch }) {
               setToggleLocation={setToggleLocation}
               toggleGuests={toggleGuests}
               setToggleGuests={setToggleGuests}
+              locationSelected={locationSelected}
+              setLocationSelected={setLocationSelected}
             />
           </div>
           <div
