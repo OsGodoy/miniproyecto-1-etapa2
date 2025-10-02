@@ -4,12 +4,15 @@ import { useContext } from "react";
 import StaysContext from "../context/StaysContext";
 import LocationSelectedContext from "../context/LocationSelectedContext";
 
-export default function ModalSearch({ toggleSearch, setToggleSearch }) {
+export default function ModalSearch({
+  toggleSearch,
+  setToggleSearch,
+  setLocationSelected,
+}) {
   const [toggleLocation, setToggleLocation] = useState(false);
   const [toggleGuests, setToggleGuests] = useState(false);
   const stays = useContext(StaysContext);
-
-  const [locationSelected, setLocationSelected] = useState("Add location");
+  const locationSelected = useContext(LocationSelectedContext);
 
   return (
     <>
