@@ -26,10 +26,10 @@ export default function ModalSearch({
       >
         <section
           id="modalBuscarMobile"
-          className={`bg-white h-180 px-4 flex flex-col items-center justify-between duration-600 -translate-y-full
+          className={`bg-white h-180 px-4 flex flex-col lg:flex-row items-center justify-between lg:justify-center duration-600 -translate-y-full
             ${toggleSearch ? "translate-y-0" : "-translate-y-100"}`}
         >
-          <div className="w-70 sm:w-120 lg:w-180 xl:w-200 h-45 lg:py-18">
+          <div className="lg:h-160 w-70 sm:w-120 lg:w-150 lg:py-18">
             <div
               style={{ fonFamily: "Mulish, sans-serif" }}
               className="h-15 w-full flex lg:hidden items-center justify-center"
@@ -64,14 +64,15 @@ export default function ModalSearch({
             </div>
             <div
               style={{ fonFamily: "Mulish, sans-serif" }}
-              className="h-25 lg:h-14 w-full flex flex-col lg:flex-row items-center justify-center rounded-2xl shadow-[0_0_8px_rgba(0,0,0,0.12)]"
+              className="h-25 lg:h-14 w-full flex flex-col lg:flex-row items-center justify-center rounded-2xl lg:rounded-r-none shadow-[0_0_8px_rgba(0,0,0,0.12)]"
             >
               <div
                 onClick={() => (
                   setToggleLocation(!toggleLocation), setToggleGuests(false)
                 )}
                 id="botonLocacionMobile"
-                className="border-1 border-gray-100 h-[50%] lg:h-full w-full rounded-t-2xl lg:rounded-tr-none lg:rounded-l-2xl flex flex-col justify-center px-4"
+                className={`bg-white border-1 h-[50%] lg:h-full w-full rounded-t-2xl lg:rounded-tr-none lg:rounded-l-2xl flex flex-col justify-center px-4 cursor-pointer hover:scale-102 hover:drop-shadow-lg duration-200
+                  ${!toggleLocation ? "border-gray-100" : "border-red-400"}`}
               >
                 <p className="text-[8px] font-semibold">LOCATION</p>
                 <p
@@ -92,7 +93,8 @@ export default function ModalSearch({
                   setToggleGuests(!toggleGuests), setToggleLocation(false)
                 )}
                 id="botonCantidadInviMobile"
-                className="border-1 border-gray-100 h-[50%] lg:h-full w-full rounded-b-2xl lg:rounded-bl-none lg:rounded-r-2xl flex flex-col justify-center px-4"
+                className={`bg-white border-1 h-[50%] lg:h-full w-full rounded-b-2xl lg:rounded-none flex flex-col justify-center px-4 cursor-pointer hover:scale-102 hover:drop-shadow-lg duration-200
+                  ${!toggleGuests ? "border-gray-100" : "border-red-400"}`}
               >
                 <p className="text-[8px] font-semibold">GUESTS</p>
                 <p
@@ -104,48 +106,51 @@ export default function ModalSearch({
                 </p>
               </div>
             </div>
-          </div>
-          <div
-            id="editarBusqueda"
-            className="w-full h-110 flex items-center justify-center"
-          >
-            <SearchEdit
-              toggleLocation={toggleLocation}
-              setToggleLocation={setToggleLocation}
-              toggleGuests={toggleGuests}
-              setToggleGuests={setToggleGuests}
-              locationSelected={locationSelected}
-              setLocationSelected={setLocationSelected}
-            />
+            <div
+              id="editarBusqueda"
+              className="w-full lg:w-150 h-110 flex items-center justify-center"
+            >
+              <SearchEdit
+                toggleLocation={toggleLocation}
+                setToggleLocation={setToggleLocation}
+                toggleGuests={toggleGuests}
+                setToggleGuests={setToggleGuests}
+                locationSelected={locationSelected}
+                setLocationSelected={setLocationSelected}
+              />
+            </div>
           </div>
           <div
             id="busquedaOkMobile"
-            className="h-20 w-full p-4 flex items-center justify-center"
+            className="h-20 lg:h-160 w-90 p-4 lg:p-0 flex lg:flex-col items-center justify-center"
           >
-            <button
-              onClick={() => (
-                setToggleSearch(!toggleSearch),
-                setToggleGuests(false),
-                setToggleLocation(false)
-              )}
-              className="bg-red-400 h-10 w-30 rounded-2xl flex items-center justify-between px-6 duration-200 active:scale-95"
-            >
-              <svg
-                className="size-4 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
+            <div className="lg:border-1 border-gray-100 h-14 w-full flex items-center justify-center bg-white rounded-r-2xl px-4 lg:shadow-[0_0_8px_rgba(0,0,0,0.12)]">
+              <button
+                onClick={() => (
+                  setToggleSearch(!toggleSearch),
+                  setToggleGuests(false),
+                  setToggleLocation(false)
+                )}
+                className="bg-red-400 h-10 w-30 rounded-2xl flex items-center justify-between px-6 cursor-pointer hover:scale-105 duration-200"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-              <p className="text-white">search</p>
-            </button>
+                <svg
+                  className="size-4 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                  />
+                </svg>
+                <p className="text-white">search</p>
+              </button>
+            </div>
+            <div className="h-110 w-full hidden lg:block"></div>
           </div>
         </section>
       </nav>

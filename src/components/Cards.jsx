@@ -19,14 +19,14 @@ export default function Cards({ setLocationSelected }) {
           <p
             onClick={() => setLocationSelected("Add location")}
             id="mostrarTodo"
-            className="cursor-pointer text-[12px] text-red-400 font-medium active:underline active:font-semibold"
+            className="cursor-pointer text-[12px] text-red-400 font-medium hover:underline hover:scale-105"
           >
             SHOW ALL
           </p>
         </button>
         <p
           id="cantidadCards"
-          className="flex items-center justify-center text-[12px] text-gray-700"
+          className="w-12 flex items-center justify-center text-[12px] text-gray-700"
         >
           {filteredStays.length} stays
         </p>

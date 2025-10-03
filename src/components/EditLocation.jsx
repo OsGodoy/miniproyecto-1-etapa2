@@ -3,7 +3,11 @@ import { useContext, useState } from "react";
 import StaysContext from "../context/StaysContext";
 import LocationSelectedContext from "../context/LocationSelectedContext";
 
-export default function EditLocation({ setLocationSelected }) {
+export default function EditLocation({
+  setLocationSelected,
+  toggleLocation,
+  toggleGuests,
+}) {
   const stays = useContext(StaysContext);
   const locationSelected = useContext(LocationSelectedContext);
 
@@ -12,13 +16,17 @@ export default function EditLocation({ setLocationSelected }) {
   );
   return (
     <>
-      <div className="w-[95%] flex flex-col justify-start gap-1">
+      <div
+        className={`w-[95%] flex flex-col justify-start gap-1 ${
+          toggleLocation ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+      >
         <ul id="locacionesMobile" className="locacionesMobile flex flex-col">
           {allCities.map((cityOk, i) => (
             <li
               onClick={() => setLocationSelected(cityOk.split(",")[0])}
               key={i}
-              className="botonSelecLocacionMobile p-1 h-8 gap-1 flex items-center justify-start"
+              className="botonSelecLocacionMobile p-1 h-8 gap-1 flex items-center justify-start cursor-pointer hover:scale-101 duration-200"
             >
               <svg
                 className="size-4 text-red-400"
