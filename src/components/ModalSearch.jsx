@@ -3,6 +3,7 @@ import SearchEdit from "./SearchEdit";
 import { useContext } from "react";
 import StaysContext from "../context/StaysContext";
 import LocationSelectedContext from "../context/LocationSelectedContext";
+import TotalGuestsContext from "../context/TotalGuestsContext";
 
 export default function ModalSearch({
   toggleSearch,
@@ -13,6 +14,7 @@ export default function ModalSearch({
   const [toggleGuests, setToggleGuests] = useState(false);
   const stays = useContext(StaysContext);
   const locationSelected = useContext(LocationSelectedContext);
+  const { totalGuests, setTotalGuests } = useContext(TotalGuestsContext);
 
   return (
     <>
@@ -99,10 +101,11 @@ export default function ModalSearch({
                 <p className="text-[8px] font-semibold">GUESTS</p>
                 <p
                   id="totalMobile"
-                  className="text-gray-300 text-[14px] font-medium"
+                  className={`text-[14px] font-medium
+                    ${totalGuests > 0 ? "text-red-400" : "text-gray-300"}`}
                   style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
                 >
-                  Add guests
+                  {totalGuests > 0 ? `${totalGuests}` : "Add guests"}
                 </p>
               </div>
             </div>

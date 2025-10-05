@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import TotalGuestsContext from "../context/TotalGuestsContext";
 import EditGuests from "./EditGuests";
 import EditLocation from "./EditLocation";
 
 export default function SearchEdit(props) {
+  const { totalGuests, setTotalGuests } = useContext(TotalGuestsContext);
+
   return (
     <>
       <div
@@ -32,7 +36,10 @@ export default function SearchEdit(props) {
           }`}
         style={{ fontFamily: "Mulish, sans-serif" }}
       >
-        <EditGuests />
+        <EditGuests
+          toggleLocation={props.toggleLocation}
+          toggleGuests={props.toggleGuests}
+        />
       </div>
     </>
   );
