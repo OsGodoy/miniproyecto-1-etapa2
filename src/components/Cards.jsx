@@ -1,25 +1,43 @@
 import { useContext } from "react";
 import StaysContext from "../context/StaysContext";
 import LocationSelectedContext from "../context/LocationSelectedContext";
+import TotalGuestsContext from "../context/TotalGuestsContext";
+import ToggleShowContext from "../context/ToggleShowContext";
 
-export default function Cards({ setLocationSelected }) {
+export default function Cards({ setLocationSelected, setTotalGuests }) {
   const stays = useContext(StaysContext);
 
   const locationSelected = useContext(LocationSelectedContext);
 
-  const filteredStays = stays.filter(
-    (stay) =>
-      locationSelected === "Add location" || stay.city === locationSelected
+  const numberTotalGuests = useContext(TotalGuestsContext);
+
+  const { isShowAll, setIsShowAll } = useContext(ToggleShowContext);
+
+  const totalGuests = Number(
+    numberTotalGuests?.totalGuests ?? numberTotalGuests ?? 0
   );
+
+  const filteredStays = stays.filter((stay) => {
+    const locationMatch =
+      locationSelected === "Add location" || stay.city === locationSelected;
+
+    const guestsMatch = totalGuests === 0 || stay.maxGuests >= totalGuests;
+
+    return locationMatch && guestsMatch;
+  });
 
   return (
     <>
       <section className="flex justify-end px-6 gap-2">
         <button className="flex items-center justify-center">
           <p
-            onClick={() => setLocationSelected("Add location")}
+            onClick={() => {
+              setLocationSelected("Add location");
+              setTotalGuests(0)
+              setIsShowAll(true);
+            }}
             id="mostrarTodo"
-            className="cursor-pointer text-[12px] text-red-400 font-medium hover:underline hover:scale-105"
+            className="cursor-pointer active:underline text-[12px] text-red-400 font-medium hover:underline hover:scale-105"
           >
             SHOW ALL
           </p>

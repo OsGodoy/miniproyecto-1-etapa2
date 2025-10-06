@@ -3,7 +3,14 @@ import TotalGuestsContext from "../context/TotalGuestsContext";
 import EditGuests from "./EditGuests";
 import EditLocation from "./EditLocation";
 
-export default function SearchEdit(props) {
+export default function SearchEdit({
+  toggleLocation,
+  setToggleLocation,
+  toggleGuests,
+  setToggleGuests,
+  locationSelected,
+  setLocationSelected,
+}) {
   const { totalGuests, setTotalGuests } = useContext(TotalGuestsContext);
 
   return (
@@ -12,7 +19,7 @@ export default function SearchEdit(props) {
         id="selectLocacionMobile"
         className={`h-110 w-70 sm:w-122 lg:w-75 absolute lg:relative flex flex-col items-center justify-start py-4 duration-500
             ${
-              props.toggleLocation & !props.toggleGuests
+              toggleLocation & !toggleGuests
                 ? "opacity-100 pointer-events-auto"
                 : "opacity-0 pointer-events-none"
             }
@@ -20,25 +27,25 @@ export default function SearchEdit(props) {
         style={{ fontFamily: "Mulish, sans-serif" }}
       >
         <EditLocation
-          locationSelected={props.locationSelected}
-          setLocationSelected={props.setLocationSelected}
-          toggleLocation={props.toggleLocation}
-          toggleGuests={props.toggleGuests}
+          locationSelected={locationSelected}
+          setLocationSelected={setLocationSelected}
+          toggleLocation={toggleLocation}
+          toggleGuests={toggleGuests}
         />
       </div>
       <div
         id="cantidadInviMobile"
         className={`h-110 w-70 sm:w-120 lg:w-75 absolute lg:relative flex flex-col items-center justify-start py-4 duration-500
           ${
-            props.toggleGuests & !props.toggleLocation
+            toggleGuests & !toggleLocation
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           }`}
         style={{ fontFamily: "Mulish, sans-serif" }}
       >
         <EditGuests
-          toggleLocation={props.toggleLocation}
-          toggleGuests={props.toggleGuests}
+          toggleLocation={toggleLocation}
+          toggleGuests={toggleGuests}
         />
       </div>
     </>
